@@ -75,14 +75,6 @@ python -m http.server 8000
 
 This site is deployed on GitHub Pages at: **https://zuraruldev.github.io**
 
-To deploy changes:
-```bash
-git add .
-git commit -m "Your commit message"
-git push origin main
-```
-
-Changes will be live within a few minutes.
 
 ## Author
 
