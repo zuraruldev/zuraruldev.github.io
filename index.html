@@ -1,13 +1,143 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Arul Zura</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=3">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <p>hello world, I'm Zura and gonna be learning to code</p>
-    <br>
-    <p>This will be my first webpage</p>
+    <header class="top-nav">
+        <div class="top-nav-content">
+            <a href="/" class="nav-name">Arul/Zura</a>
+            <div class="theme-toggle">
+                <span>Appearance</span>
+                <select id="theme-select">
+                    <option value="system">System</option>
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile-container">
+                <div class="gif-container" id="gifContainer"></div>
+                <img src="images/profile_teto.jpg" alt="Portrait of Arul / Zura" class="avatar">
+                <button class="click-me-btn" id="clickMeBtn">Click me</button>
+            </div>
+            <h1>Arul / Zura</h1>
+            <p class="tagline">I love messing around with something I shouldn't touch of.</p>
+            
+            <a href="https://www.instagram.com/manrlhdytt/" target="_blank" class="follow-btn">Follow</a>
+            
+            <ul class="social-links">
+                <li><a href="mailto:manarulhdyt671@gmail.com"><i class="fa-solid fa-envelope"></i> Email</a></li>
+                <li><a href="https://github.com/zuraruldev" target="_blank"><i class="fa-brands fa-github"></i> Github</a></li>
+                <li><a href="#"><i class="fa-brands fa-discord"></i> Discord: zur_aa</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <section id="about">
+                <h2>About</h2>
+                <p>I study computer engineering. (LARP)</p>
+            </section>
+            
+            <section id="education">
+                <h2>Education</h2>
+                <a href="https://pnc.ac.id/tentang-kami-2/" target="_blank" class="item-link">
+                    <div class="item">
+                        <div class="item-text">
+                            <h3>Cilacap State Polytechnic</h3>
+                            <p>Majoring Computer and Business especially Informatics Engineering.</p>
+                        </div>
+                        <img src="images/cilacap_state_polytechnic.png" alt="Cilacap State Polytechnic" class="item-logo" id="poly-logo">
+                    </div>
+                </a>
+            </section>
+            
+            <section id="experience">
+                <h2>Experience (LARP)</h2>
+                
+                <div class="item-link">
+                    <div class="item">
+                        <div class="item-text">
+                            <h3>C++</h3>
+                            <p>Mastering systems programming and algorithms. Experience with competitive programming and optimization techniques.</p>
+                        </div>
+                        <img src="images/cpp.png" alt="C++" class="item-logo">
+                    </div>
+                </div>
+                
+                <div class="item-link">
+                    <div class="item">
+                        <div class="item-text">
+                            <h3>JavaScript</h3>
+                            <p>Full-stack web development with React.js, Next.js, and Node.js. Building responsive and interactive web applications with modern frameworks.</p>
+                        </div>
+                        <img src="images/javascript.png" alt="JavaScript" class="item-logo">
+                    </div>
+                </div>
+                
+                <div class="item-link">
+                    <div class="item">
+                        <div class="item-text">
+                            <h3>Python</h3>
+                            <p>Machine learning and data science with TensorFlow, PyTorch, and scikit-learn. Deep learning frameworks and data analysis expertise.</p>
+                        </div>
+                        <img src="images/pythonpng.png" alt="Python" class="item-logo">
+                    </div>
+                </div>
+            </section>
+            
+            <section id="blogs">
+                <h2>Blogs</h2>
+                <div class="item">
+                    <div class="item-text">
+                        <h3><a href="Blogs/index.html">Annual Reviews 2025 →</a></h3>
+                        <p>2025.12</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-text">
+                        <h3><a href="Blogs/index.html">Annual Reviews 2026 →</a></h3>
+                        <p>2026.12</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-text">
+                        <h3><a href="Blogs/index.html">Annual Reviews 2027 →</a></h3>
+                        <p>2027.12</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="awards">
+                <h2>Awards (none, yet)</h2>
+                <div class="item">
+                    <div class="item-text">
+                        <p><strong>Lorem Ipsum Award First Prize</strong> 2026.08</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="item-text">
+                        <p><strong>Lorem Ipsum Second Prize</strong> 2025.05</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
 </body>
 </html>
