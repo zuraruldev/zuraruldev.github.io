@@ -8,19 +8,15 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../style.css?v=3">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <header class="top-nav">
         <div class="top-nav-content">
             <a href="../index.html" class="nav-name">← Back to Portfolio</a>
-            <div class="theme-toggle">
-                <span>Appearance</span>
-                <select id="theme-select">
-                    <option value="system">System</option>
-                    <option value="light">Light</option>
-                    <option value="dark">Dark</option>
-                </select>
-            </div>
+            <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
         </div>
     </header>
 
@@ -31,7 +27,7 @@
                 
                 <div class="item">
                     <div class="item-text">
-                        <h3>2028: Larp larp sahoor</h3>
+                        <h3>2028: 5</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                     </div>
                 </div>
@@ -40,7 +36,7 @@
                 
                 <div class="item">
                     <div class="item-text">
-                        <h3>2027: Breaking the Limits</h3>
+                        <h3>2027: 4</h3>
                         <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                     </div>
                 </div>
@@ -49,7 +45,7 @@
 
                 <div class="item">
                     <div class="item-text">
-                        <h3>2026: Messing Around with New Tools</h3>
+                        <h3>2026: 3</h3>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                     </div>
                 </div>
@@ -58,7 +54,7 @@
 
                 <div class="item">
                     <div class="item-text">
-                        <h3>2025: My Learning Journey</h3>
+                        <h3>2025: 2</h3>
                         <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet.</p>
                     </div>
                 </div>
@@ -67,7 +63,7 @@
 
                 <div class="item">
                     <div class="item-text">
-                        <h3>2024: How It All Started</h3>
+                        <h3>2024: 1</h3>
                         <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</p>
                     </div>
                 </div>
@@ -77,28 +73,42 @@
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const themeSelect = document.getElementById('theme-select');
-            const applyTheme = (theme) => {
+            const toggleBtn = document.getElementById('theme-toggle-btn');
+            const icon = toggleBtn.querySelector('i');
+            const themes = ['dark', 'light', 'system'];
+
+            const getEffectiveTheme = (theme) => {
                 if (theme === 'system') {
-                    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                    document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
-                } else {
-                    document.documentElement.setAttribute('data-theme', theme);
+                    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 }
+                return theme;
             };
-            const savedTheme = localStorage.getItem('theme') || 'system';
-            themeSelect.value = savedTheme;
+
+            const updateIcon = (theme) => {
+                const effective = getEffectiveTheme(theme);
+                icon.className = effective === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+            };
+
+            const applyTheme = (theme) => {
+                document.documentElement.setAttribute('data-theme', getEffectiveTheme(theme));
+                updateIcon(theme);
+            };
+
+            const savedTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(savedTheme);
 
-            themeSelect.addEventListener('change', (e) => {
-                const theme = e.target.value;
-                localStorage.setItem('theme', theme);
-                applyTheme(theme);
+            toggleBtn.addEventListener('click', () => {
+                const current = localStorage.getItem('theme') || 'dark';
+                const effective = getEffectiveTheme(current);
+                const next = effective === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', next);
+                applyTheme(next);
             });
 
-            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-                if (themeSelect.value === 'system') {
-                    document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const current = localStorage.getItem('theme') || 'dark';
+                if (current === 'system') {
+                    applyTheme('system');
                 }
             });
         });

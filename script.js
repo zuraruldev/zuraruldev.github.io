@@ -1,36 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const themeSelect = document.getElementById('theme-select');
+    const toggleBtn = document.getElementById('theme-toggle-btn');
+    const icon = toggleBtn.querySelector('i');
     const clickMeBtn = document.getElementById('clickMeBtn');
     const gifContainer = document.getElementById('gifContainer');
     
     let isPlaying = false;
     let audioElement = null;
-    
-    const applyTheme = (theme) => {
+
+    const themes = ['dark', 'light', 'system'];
+
+    const getEffectiveTheme = (theme) => {
         if (theme === 'system') {
-            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-theme', systemPrefersDark ? 'dark' : 'light');
-        } else {
-            document.documentElement.setAttribute('data-theme', theme);
+            return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         }
+        return theme;
     };
 
-    // Load saved theme or default to system
-    const savedTheme = localStorage.getItem('theme') || 'system';
-    themeSelect.value = savedTheme;
+    const updateIcon = (theme) => {
+        const effective = getEffectiveTheme(theme);
+        icon.className = effective === 'dark' ? 'fa-solid fa-moon' : 'fa-solid fa-sun';
+    };
+
+    const applyTheme = (theme) => {
+        document.documentElement.setAttribute('data-theme', getEffectiveTheme(theme));
+        updateIcon(theme);
+    };
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
     applyTheme(savedTheme);
 
-    // Handle theme change
-    themeSelect.addEventListener('change', (e) => {
-        const theme = e.target.value;
-        localStorage.setItem('theme', theme);
-        applyTheme(theme);
+    toggleBtn.addEventListener('click', () => {
+        const current = localStorage.getItem('theme') || 'dark';
+        const effective = getEffectiveTheme(current);
+        const next = effective === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', next);
+        applyTheme(next);
     });
 
-    // Listen for system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (themeSelect.value === 'system') {
-            document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        const current = localStorage.getItem('theme') || 'dark';
+        if (current === 'system') {
+            applyTheme('system');
         }
     });
 
